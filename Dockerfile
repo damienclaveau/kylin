@@ -37,7 +37,8 @@ ENV PATH $PATH:$JAVA_HOME/bin
 RUN rm /usr/bin/java && ln -s $JAVA_HOME/bin/java /usr/bin/java
 
 # kylin 1.5.2
-RUN curl -s https://mirrors.tuna.tsinghua.edu.cn/apache/kylin/apache-kylin-1.5.2.1/apache-kylin-1.5.2.1-HBase1.x-bin.tar.gz | tar -xz -C /usr/local/ && cd /usr/local && ln -s ./apache-kylin-1.5.2.1-bin kylin &&  KYLIN_HOME /usr/local/kylin
+RUN curl -s https://mirrors.tuna.tsinghua.edu.cn/apache/kylin/apache-kylin-1.5.2.1/apache-kylin-1.5.2.1-HBase1.x-bin.tar.gz | tar -xz -C /usr/local/ && cd /usr/local && ln -s ./apache-kylin-1.5.2.1-bin kylin 
+RUN KYLIN_HOME /usr/local/kylin
 
 # fixing the libhadoop.so like a boss
 RUN mkdir -p /usr/local/hadoop/lib/native/
