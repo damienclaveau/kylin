@@ -14,7 +14,7 @@ RUN yum clean all; \
     rpm --rebuilddb; \
     yum install -y curl which tar sudo openssh-server openssh-clients rsync
 # update libselinux. see https://github.com/sequenceiq/hadoop-docker/issues/14
-RUN yum update -y libselinux
+#RUN yum update -y libselinux
 
 # passwordless ssh
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
@@ -37,9 +37,7 @@ ENV PATH $PATH:$JAVA_HOME/bin
 RUN rm /usr/bin/java && ln -s $JAVA_HOME/bin/java /usr/bin/java
 
 # kylin 1.5.2
-RUN curl -s https://www-us.apache.org/dist/kylin/apache-kylin-1.5.2.1/apache-kylin-1.5.2.1-bin.tar.gz | tar -xz -C /usr/local/
-RUN cd /usr/local && ln -s ./apache-kylin-1.5.2.1-bin kylin
-ENV KYLIN_HOME /usr/local/kylin
+RUN curl -s https://mirrors.tuna.tsinghua.edu.cn/apache/kylin/apache-kylin-1.5.2.1/apache-kylin-1.5.2.1-HBase1.x-bin.tar.gz | tar -xz -C /usr/local/ && cd /usr/local && ln -s ./apache-kylin-1.5.2.1-bin kylin &&  KYLIN_HOME /usr/local/kylin
 
 # fixing the libhadoop.so like a boss
 RUN mkdir -p /usr/local/hadoop/lib/native/
